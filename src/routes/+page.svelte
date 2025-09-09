@@ -1,30 +1,11 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
     import SensorMap from '$lib/components/SensorMap.svelte';
     import type { Sensor } from '$lib/types/sensor';
-    
-    let sensores: Sensor[] = [];
-    let error: string | null = null;
 
-    onMount(async () => {
-        try {
-            const response = await fetch('/');
-            if (!response.ok) {
-                throw new Error(`Error fetching data: ${response.statusText}`);
-            }
-            sensores = await response.json();
-        } catch (e) {
-            if (e instanceof Error) {
-                error = e.message;
-                console.error('Fetch error:', e);
-            } else {
-                error = 'Unknown error';
-                console.error('Unknown error:', e);
-            }
-        }
-    });
-
+    export let data;
     
+    let sensores: Sensor[] = data.sensores;
+    let error: string | null = data.error || null;
 </script>
 
 <h1>Sensores</h1>
@@ -44,4 +25,4 @@
 {/if}
 
 <h1>Mapa de Sensores</h1>
-<SensorMap />
+<SensorMap {sensores} />
