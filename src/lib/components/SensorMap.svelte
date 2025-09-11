@@ -43,11 +43,11 @@
 				const customDivIcon = L.divIcon({
 					className: 'custom-div-icon',
 					html: `
-						<div class="marker-wrapper">
+						<div class="relative flex flex-col items-center">
 							<img src="${greenIcon.options.iconUrl}" 
 								 style="width:${width}px; height:${height}px;" 
 								 alt="marker" />
-							<div class="marker-label">${sensor.ID_EXTERNO}</div>
+							<div class="text-xs font-semibold text-gray-700">${sensor.ID_EXTERNO}</div>
 						</div>
 					`,
 					iconSize: [40, 20],
@@ -77,11 +77,13 @@
 	});
 </script>
 
-<div class="map-container" bind:this={mapContainer}></div>
+<div class="h-full w-full" bind:this={mapContainer}></div>
 
 <style>
-	.map-container {
-		height: 500px;
-		width: 100%;
+	:global(.custom-div-icon) {
+		background: none !important;
+		border: none !important;
+		width: auto !important;
+		height: auto !important;
 	}
 </style>
